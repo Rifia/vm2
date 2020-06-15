@@ -20,6 +20,22 @@ public class FirstLab {
     public static double df1(double x){
         return 3*x*x-2;
     }
+    
+    public static double f2(double x){
+        return x * x + 4 * x - 3;
+    }
+
+    public static double df2(double x){
+        return 2 * x + 4;
+    }
+
+    public static double f3(double x){
+        return 2 * x * x * x * x * x - 2 * x * x * x + 2;
+    }
+
+    public static double df3(double x){
+        return 10 * x * x * x * x - 6 * x * x;
+    }
 
     public static double newton(double EPS, double x, int N) throws IOException{
         double xn = 0;
