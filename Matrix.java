@@ -4,11 +4,23 @@ import com.sun.xml.internal.bind.v2.TODO;
 
 import java.util.Random;
 
+import static java.lang.Math.abs;
+
 public class Matrix {
 
     public static int maxVal = 1;
     public static int minVal = -1;
 
+    public static double minSmall = 0.0;
+    public static double maxSmall = 0.1;
+
+    //погрешность
+    public static double epsError(double[] X, int N){
+        double eps = 0;
+        for(int i = 0; i < N; i++)
+            eps += abs(X[i] - 1);
+        return eps/N;
+    }
 
     //генерация хорошо обусловленной матрицы
     public static double[][] generate(int size) {
@@ -17,7 +29,7 @@ public class Matrix {
 
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                matrix[i][j] = random.nextInt(maxVal) + minVal;
+                matrix[i][j] = random.nextInt(maxVal) + minVal + Math.random()*0.001;
             }
         }
 
