@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
+import static vm_lab.Matrix.epsError;
 import static vm_lab.Matrix.sol;
 
 public class SecondLab {
@@ -49,18 +50,22 @@ public class SecondLab {
             Matrix.gaussFirst(matrix, B, SIZE);
 
             Matrix.gaussFirstIMatrix(matrix, B, SIZE);
-            Matrix.print(Matrix.gaussFirstIMatrix(matrix, B, SIZE));
+            //Matrix.print(Matrix.gaussFirstIMatrix(matrix, B, SIZE));
             xSolution = Matrix.Solution(matrix, B, SIZE);
             System.out.println("X(good) = ");
-            Matrix.printB(xSolution);
+            //Matrix.printB(xSolution);
 
             //вывод полученных данных в файл
 
             try{
-                String sol = sol(xSolution);
+                //String sol = Matrix.sol(xSolution);
+                String errorE = "X(good) error = " + String.format("%.15f", Matrix.epsError(xSolution, SIZE)) + "\n";
+                String size = "N = " + Integer.toString(SIZE)+ "\n";
                 bos.write(IER0.getBytes());
-                bos.write(X.getBytes());
-                bos.write(sol.getBytes());
+                bos.write(errorE.getBytes());
+                bos.write(size.getBytes());
+                //bos.write(X.getBytes());
+                //bos.write(sol.getBytes());
             }
             catch (Exception e) {
                 bos.write(e.getMessage().getBytes());
@@ -85,20 +90,25 @@ public class SecondLab {
         }
 
     else{
+        //Matrix.print(matrixGilbert);
         BHilbert = Matrix.generateB(matrixGilbert, SIZE);
         Matrix.gaussFirst(matrixGilbert, BHilbert, SIZE);
         Matrix.gaussFirstIMatrix(matrixGilbert, BHilbert, SIZE);
         xHilbertSolution = Matrix.Solution(matrixGilbert, BHilbert, SIZE);
         System.out.println("X(Hilbert) = ");
-        Matrix.printB(xHilbertSolution);
+        //Matrix.printB(xHilbertSolution);
 
             //вывод полученных данных в файл
 
             try{
-                String sol = sol(xHilbertSolution);
+                //String sol = Matrix.sol(xHilbertSolution);
+                String errorE = "X(Hilbert) error = " +String.format("%.15f", Matrix.epsError(xHilbertSolution, SIZE)) + "\n";
+                String size = "N = " + Integer.toString(SIZE)+ "\n";
                 bos.write(IER0.getBytes());
-                bos.write(XH.getBytes());
-                bos.write(sol.getBytes());
+                bos.write(errorE.getBytes());
+                bos.write(size.getBytes());
+                //bos.write(XH.getBytes());
+                //bos.write(sol.getBytes());
             }
             catch (Exception e) {
                 bos.write(e.getMessage().getBytes());
